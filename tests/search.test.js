@@ -39,7 +39,7 @@ describe('Pruebas de regresión de búsqueda', function() {
             //expect(pageTitle).to.not.include('Selenium');
 
              // Validación correcta
-             expect(pageTitle).to.include('Selenium');
+             expect(pageTitle).to.include('Sxlenium');
 
 
         } catch (error) {
