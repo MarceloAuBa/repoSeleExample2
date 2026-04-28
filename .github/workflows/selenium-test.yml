@@ -22,10 +22,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'  #Agregado para cachear las dependencias de npm
 
     # Paso 3: Instalar las dependencias del proyecto
     - name: Instalar dependencias
-      run: npm install
+      run: npm ci  # install
 
     # Paso 4: Instalar Google Chrome y dependencias adicionales
     - name: Instalar Google Chrome y Xvfb para entorno sin interfaz
@@ -33,6 +34,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable xvfb
 
+    # Paso 4.5: Verificar la instalación de mocha
+    - name: Verificar mocha
+      run: npx mocha --version
+
     # Paso 5: Ejecutar las pruebas de regresión en un entorno virtual sin interfaz
     - name: Ejecutar pruebas de regresión con Selenium
-      run: xvfb-run --auto-servernum npm test
+      run: xvfb-run --auto-servernum npx mocha tests/ --timeout 10000  #run: xvfb-run --auto-servernum npm test
+      
